@@ -16,6 +16,11 @@ namespace blog_zero_downtime_with_health_checks
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<HostOptions>(option =>
+            {
+                option.ShutdownTimeout = System.TimeSpan.FromSeconds(30);
+            });
+
             services.AddSingleton<ShuttingDownHealthCheck>();
 
             services.AddHealthChecks()
